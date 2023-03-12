@@ -20,8 +20,8 @@ import (
 	"github.com/cloudwego/kitex/client"
 	"github.com/icando/chatgpt-proxy-server/kitex_gen/api"
 	"github.com/icando/chatgpt-proxy-server/kitex_gen/api/gptservice"
+	"github.com/sashabaranov/go-openai"
 	"log"
-	"time"
 )
 
 func main() {
@@ -29,13 +29,17 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	for {
-		req := &api.Request{Message: "my request"}
-		resp, err := client.Echo(context.Background(), req)
-		if err != nil {
-			log.Fatal(err)
-		}
-		log.Println(resp)
-		time.Sleep(time.Second)
+	req := &api.ChatCompletionRequest{Model: openai.GPT3Dot5Turbo,
+		Messages: []*api.ChatCompletionMessage{
+			{
+				Role:    openai.ChatMessageRoleUser,
+				Content: "Hello!",
+			},
+		},
 	}
+	resp, err := client.CreateChatCompletion35(context.Background(), req)
+	if err != nil {
+		log.Fatal(err)
+	}
+	log.Println(resp)
 }

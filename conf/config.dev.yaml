@@ -1,5 +1,5 @@
 # 日志路径
-logPath: xxx-yyy-chatgpt.log
+logPath: ./logs/xxx-yyy-chatgpt.log
 
 # GPT 相关配置
 gptConfig:
