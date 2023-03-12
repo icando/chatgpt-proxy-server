@@ -1,0 +1,6 @@
+# 日志路径
+logPath: xxx-yyy-chatgpt.log
+
+# GPT 相关配置
+gptConfig:
+  api_key: your_api_key
