@@ -30,7 +30,8 @@ client, err := gptservice.NewClient("xxx.yyy.chatgpt", client.WithHostPorts("0.0
 
 * 执行
 
-执行client/main.go
+    执行client/main.go
+
 
 ## 其他
 
