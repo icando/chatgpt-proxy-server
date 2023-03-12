@@ -1,5 +1,0 @@
-2023/03/12 09:59:19.287672 server.go:81: [Info] KITEX: server listen at addr=[::]:8888
-2023/03/12 09:59:23.949985 trans_server.go:120: [Warn] KITEX: server graceful shutdown error: internal exception: operation not supported
-2023/03/12 10:09:05.142188 server.go:81: [Info] KITEX: server listen at addr=[::]:8888
-2023/03/12 10:14:06.423232 server.go:81: [Info] KITEX: server listen at addr=[::]:8888
-2023/03/12 10:20:11.372068 server.go:81: [Info] KITEX: server listen at addr=[::]:8888
