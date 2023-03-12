@@ -14,7 +14,8 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	req := &api.ChatCompletionRequest{Model: openai.GPT3Dot5Turbo,
+	req := &api.ChatCompletionRequest{
+		Model: openai.GPT3Dot5Turbo,
 		Messages: []*api.ChatCompletionMessage{
 			{
 				Role:    openai.ChatMessageRoleUser,
