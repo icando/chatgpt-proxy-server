@@ -6,13 +6,13 @@
 
 ```
 func main() {
-    // ip地址和端口改成 chatgpt-proxy-server 部署的地址和端口
+	// ip地址和端口改成 chatgpt-proxy-server 部署的地址和端口
 	client, err := gptservice.NewClient("xxx.yyy.chatgpt", client.WithHostPorts("0.0.0.0:8888"))
 	if err != nil {
 		log.Fatal(err)
 	}
 	req := &api.ChatCompletionRequest{
-	    Model: openai.GPT3Dot5Turbo,
+		Model: openai.GPT3Dot5Turbo,
 		Messages: []*api.ChatCompletionMessage{
 			{
 				Role:    openai.ChatMessageRoleUser,
