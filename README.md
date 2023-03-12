@@ -5,9 +5,7 @@
 ## 详细文档
 
 ### 服务端
-* 配置api key
-
-在/conf/config.prod.yaml下配置
+* 配置api key。在/conf/config.prod.yaml下配置：
 
 ```
 # GPT 相关配置
@@ -35,6 +33,8 @@ client, err := gptservice.NewClient("xxx.yyy.chatgpt", client.WithHostPorts("0.0
 执行client/main.go
 
 ## 其他
+
 OpenAI加大了对国内的封锁，国内访问ChatGPT越来越难。
+
 ChatGPT很强大，我搭建了一个服务方便学习研究，免注册使用，欢迎大家一起交流体验~
 ![欢迎交流](./docs/images/扫码_搜索联合传播样式-标准色版.png)
