@@ -25,7 +25,7 @@ import (
 )
 
 func main() {
-	client, err := gptservice.NewClient("hello", client.WithHostPorts("0.0.0.0:8888"))
+	client, err := gptservice.NewClient("xxx.yyy.chatgpt", client.WithHostPorts("0.0.0.0:8888"))
 	if err != nil {
 		log.Fatal(err)
 	}
