@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"github.com/icando/chatgpt-proxy-server/config"
 	"github.com/icando/chatgpt-proxy-server/kitex_gen/api"
 	"github.com/sashabaranov/go-openai"
 )
@@ -19,6 +20,19 @@ func (s *GPTServiceImpl) Echo(ctx context.Context, req *api.Request) (resp *api.
 
 // CreateChatCompletion35 implements the GPTServiceImpl interface.
 func (s *GPTServiceImpl) CreateChatCompletion35(ctx context.Context, request *api.ChatCompletionRequest) (resp *api.ChatCompletionResponse, err error) {
+	if config.ENV == "dev" {
+		return &api.ChatCompletionResponse{
+			Model: request.Model,
+			Choices: []*api.ChatCompletionChoice{{
+				Index: 1,
+				Message: &api.ChatCompletionMessage{
+					Role:    openai.ChatMessageRoleAssistant,
+					Content: request.Messages[len(request.Messages)-1].Content,
+				},
+			}},
+		}, nil
+	}
+
 	rawRsp, rawErr := s.client.CreateChatCompletion(
 		ctx,
 		convertRequest(request),
