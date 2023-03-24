@@ -20,7 +20,7 @@ func (s *GPTServiceImpl) Echo(ctx context.Context, req *api.Request) (resp *api.
 
 // CreateChatCompletion35 implements the GPTServiceImpl interface.
 func (s *GPTServiceImpl) CreateChatCompletion35(ctx context.Context, request *api.ChatCompletionRequest) (resp *api.ChatCompletionResponse, err error) {
-	if config.ENV == "dev" {
+	if config.GetConfig().Env == "dev" {
 		return &api.ChatCompletionResponse{
 			Model: request.Model,
 			Choices: []*api.ChatCompletionChoice{{

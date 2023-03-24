@@ -13,6 +13,7 @@ var (
 
 //Config example config
 type Config struct {
+	Env       string     `yaml:"env"`
 	LogPath   string     `yaml:"logPath"`
 	GtpConfig *GtpConfig `yaml:"gptConfig"`
 }
