@@ -23,7 +23,7 @@ echo -e "${BLUE_COLOR}合并代码成功${RES}\n"
 echo -e "${BLUE_COLOR}环境准备完成${RES}\n"
 
 echo -e "${YELOW_COLOR}---step2:编译---${RES}"
-go build -o output/bin/${RUN_NAME}
+go build -o output/bin/${RUN_NAME} main.go
 echo -e "${BLUE_COLOR}编译完成${RES}\n"
 
 echo -e "${YELOW_COLOR}---step3:杀掉进程并且运行---${RES}"
