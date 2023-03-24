@@ -33,15 +33,21 @@ func main() {
 ### 服务端
 * 配置api key。在/conf/config.prod.yaml下配置：
 
-```
-# GPT 相关配置
-gptConfig:
-  api_key: your_api_key
-```
+  * 复制配置文件
+  ```
+  cd conf
+  cp config.example.yaml config.yaml
+  ```
+  * 修改配置
+  ```
+  # GPT 相关配置
+  gptConfig:
+    api_key: your_api_key
+  ```
 
 * 服务运行 
 ```
-sh script/start_prod.sh
+sh script/start.sh
 ```
 
 ### 客户端
@@ -51,7 +57,7 @@ sh script/start_prod.sh
 * 配置服务端地址
 
 ```
-client, err := gptservice.NewClient("xxx.yyy.chatgpt", client.WithHostPorts("0.0.0.0:8888"))
+client, err := gptservice.NewClient("chatgpt.proxy.server", client.WithHostPorts("0.0.0.0:8888"))
 ```
 
 * 执行
