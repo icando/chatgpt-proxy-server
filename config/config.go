@@ -8,7 +8,6 @@ import (
 )
 
 var (
-	ENV string
 	cfg *Config
 )
 
@@ -29,7 +28,7 @@ func GetConfig() *Config {
 	if cfg != nil {
 		return cfg
 	}
-	configPath := "./conf/config." + ENV + ".yaml"
+	configPath := "./conf/config.yaml"
 	klog.Info("load config: " + configPath)
 	cfgFile := flag.String("config", configPath, "配置文件路径")
 
