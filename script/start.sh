@@ -15,16 +15,6 @@ CURDIR=$(cd $(dirname $0); pwd)
 mkdir -p output/bin output/conf
 cp conf/* output/conf/
 
-RUNTIME_ROOT=${CURDIR}
-export KITEX_RUNTIME_ROOT=$RUNTIME_ROOT
-export KITEX_LOG_DIR="$RUNTIME_ROOT/logs"
-if [ ! -d "$KITEX_LOG_DIR/app" ]; then
-    mkdir -p "$KITEX_LOG_DIR/app"
-fi
-if [ ! -d "$KITEX_LOG_DIR/rpc" ]; then
-    mkdir -p "$KITEX_LOG_DIR/rpc"
-fi
-
 git fetch origin master
 git reset --hard FETCH_HEAD
 git clean -df

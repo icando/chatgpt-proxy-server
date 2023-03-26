@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	client, err := gptservice.NewClient("chatgpt.proxy.server", client.WithHostPorts("1.15.84.181:8888"))
+	client, err := gptservice.NewClient("chatgpt.proxy.server", client.WithHostPorts("0.0.0.0:8888"))
 	if err != nil {
 		log.Fatal(err)
 	}
