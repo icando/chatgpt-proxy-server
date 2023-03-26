@@ -19,8 +19,7 @@ func NewServiceInfo() *kitex.ServiceInfo {
 	serviceName := "GPTService"
 	handlerType := (*api.GPTService)(nil)
 	methods := map[string]kitex.MethodInfo{
-		"echo":                   kitex.NewMethodInfo(echoHandler, newGPTServiceEchoArgs, newGPTServiceEchoResult, false),
-		"CreateChatCompletion35": kitex.NewMethodInfo(createChatCompletion35Handler, newGPTServiceCreateChatCompletion35Args, newGPTServiceCreateChatCompletion35Result, false),
+		"CreateImage": kitex.NewMethodInfo(createImageHandler, newGPTServiceCreateImageArgs, newGPTServiceCreateImageResult, false),
 	}
 	extra := map[string]interface{}{
 		"PackageName": "api",
@@ -36,40 +35,22 @@ func NewServiceInfo() *kitex.ServiceInfo {
 	return svcInfo
 }
 
-func echoHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
-	realArg := arg.(*api.GPTServiceEchoArgs)
-	realResult := result.(*api.GPTServiceEchoResult)
-	success, err := handler.(api.GPTService).Echo(ctx, realArg.Req)
+func createImageHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	realArg := arg.(*api.GPTServiceCreateImageArgs)
+	realResult := result.(*api.GPTServiceCreateImageResult)
+	success, err := handler.(api.GPTService).CreateImage(ctx, realArg.Request)
 	if err != nil {
 		return err
 	}
 	realResult.Success = success
 	return nil
 }
-func newGPTServiceEchoArgs() interface{} {
-	return api.NewGPTServiceEchoArgs()
+func newGPTServiceCreateImageArgs() interface{} {
+	return api.NewGPTServiceCreateImageArgs()
 }
 
-func newGPTServiceEchoResult() interface{} {
-	return api.NewGPTServiceEchoResult()
-}
-
-func createChatCompletion35Handler(ctx context.Context, handler interface{}, arg, result interface{}) error {
-	realArg := arg.(*api.GPTServiceCreateChatCompletion35Args)
-	realResult := result.(*api.GPTServiceCreateChatCompletion35Result)
-	success, err := handler.(api.GPTService).CreateChatCompletion35(ctx, realArg.Request)
-	if err != nil {
-		return err
-	}
-	realResult.Success = success
-	return nil
-}
-func newGPTServiceCreateChatCompletion35Args() interface{} {
-	return api.NewGPTServiceCreateChatCompletion35Args()
-}
-
-func newGPTServiceCreateChatCompletion35Result() interface{} {
-	return api.NewGPTServiceCreateChatCompletion35Result()
+func newGPTServiceCreateImageResult() interface{} {
+	return api.NewGPTServiceCreateImageResult()
 }
 
 type kClient struct {
@@ -82,21 +63,11 @@ func newServiceClient(c client.Client) *kClient {
 	}
 }
 
-func (p *kClient) Echo(ctx context.Context, req *api.Request) (r *api.Response, err error) {
-	var _args api.GPTServiceEchoArgs
-	_args.Req = req
-	var _result api.GPTServiceEchoResult
-	if err = p.c.Call(ctx, "echo", &_args, &_result); err != nil {
-		return
-	}
-	return _result.GetSuccess(), nil
-}
-
-func (p *kClient) CreateChatCompletion35(ctx context.Context, request *api.ChatCompletionRequest) (r *api.ChatCompletionResponse, err error) {
-	var _args api.GPTServiceCreateChatCompletion35Args
+func (p *kClient) CreateImage(ctx context.Context, request *api.ImageRequest) (r *api.ImageResponse, err error) {
+	var _args api.GPTServiceCreateImageArgs
 	_args.Request = request
-	var _result api.GPTServiceCreateChatCompletion35Result
-	if err = p.c.Call(ctx, "CreateChatCompletion35", &_args, &_result); err != nil {
+	var _result api.GPTServiceCreateImageResult
+	if err = p.c.Call(ctx, "CreateImage", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

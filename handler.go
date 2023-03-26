@@ -45,78 +45,15 @@ func (s *GPTServiceImpl) CreateChatCompletion35(ctx context.Context, request *ap
 	return convertResponse(rawRsp), nil
 }
 
-func convertRequest(rawReq *api.ChatCompletionRequest) openai.ChatCompletionRequest {
-	req := openai.ChatCompletionRequest{}
+func (s *GPTServiceImpl) CreateImage(ctx context.Context, request *api.ImageRequest) (resp *api.ImageResponse, err error) {
+	rawRsp, rawErr := s.client.CreateImage(
+		ctx,
+		convertImageRequest(request),
+	)
 
-	if rawReq != nil {
-		req.Model = rawReq.Model
-		req.Messages = convertChatCompletionMessage(rawReq.Messages)
-		req.MaxTokens = int(rawReq.MaxTokens)
-		req.Temperature = float32(rawReq.Temperature)
-		req.TopP = float32(rawReq.TopP)
-		req.N = int(rawReq.N)
-		req.Stream = rawReq.Stream
-		req.Stop = rawReq.Stop
-		req.PresencePenalty = float32(rawReq.PresencePenalty)
-		req.FrequencyPenalty = float32(rawReq.FrequencyPenalty)
-		req.LogitBias = convertMapInt32(rawReq.LogitBias)
-		req.User = rawReq.User
+	if rawErr != nil {
+		return convertImageResponse(rawRsp), rawErr
 	}
 
-	return req
-}
-
-func convertResponse(rawRsp openai.ChatCompletionResponse) *api.ChatCompletionResponse {
-	return &api.ChatCompletionResponse{
-		ID:      rawRsp.ID,
-		Object:  rawRsp.Object,
-		Created: rawRsp.Created,
-		Model:   rawRsp.Model,
-		Choices: convertChatCompletionChoices(rawRsp.Choices),
-		Usage:   convertUsage(rawRsp.Usage),
-	}
-}
-
-func convertChatCompletionMessage(msg []*api.ChatCompletionMessage) []openai.ChatCompletionMessage {
-	var r []openai.ChatCompletionMessage
-	for _, m := range msg {
-		r = append(r, openai.ChatCompletionMessage{
-			Role:    m.Role,
-			Content: m.Content,
-			Name:    m.Name,
-		})
-	}
-	return r
-}
-
-func convertMapInt32(raw map[string]int32) map[string]int {
-	r := make(map[string]int)
-	for k, v := range raw {
-		r[k] = int(v)
-	}
-	return r
-}
-
-func convertChatCompletionChoices(raw []openai.ChatCompletionChoice) []*api.ChatCompletionChoice {
-	var r []*api.ChatCompletionChoice
-	for _, c := range raw {
-		r = append(r, &api.ChatCompletionChoice{
-			Index: int32(c.Index),
-			Message: &api.ChatCompletionMessage{
-				Role:    c.Message.Role,
-				Content: c.Message.Content,
-				Name:    c.Message.Name,
-			},
-			FinishReason: c.FinishReason,
-		})
-	}
-	return r
-}
-
-func convertUsage(raw openai.Usage) *api.Usage {
-	return &api.Usage{
-		PromptTokens:     int32(raw.PromptTokens),
-		CompletionTokens: int32(raw.CompletionTokens),
-		TotalTokens:      int32(raw.TotalTokens),
-	}
+	return convertImageResponse(rawRsp), nil
 }
