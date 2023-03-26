@@ -11,6 +11,8 @@ import (
 
 // Client is designed to provide IDL-compatible methods with call-option parameter for kitex framework.
 type Client interface {
+	Echo(ctx context.Context, req *api.Request, callOptions ...callopt.Option) (r *api.Response, err error)
+	CreateChatCompletion35(ctx context.Context, request *api.ChatCompletionRequest, callOptions ...callopt.Option) (r *api.ChatCompletionResponse, err error)
 	CreateImage(ctx context.Context, request *api.ImageRequest, callOptions ...callopt.Option) (r *api.ImageResponse, err error)
 }
 
@@ -41,6 +43,16 @@ func MustNewClient(destService string, opts ...client.Option) Client {
 
 type kGPTServiceClient struct {
 	*kClient
+}
+
+func (p *kGPTServiceClient) Echo(ctx context.Context, req *api.Request, callOptions ...callopt.Option) (r *api.Response, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.Echo(ctx, req)
+}
+
+func (p *kGPTServiceClient) CreateChatCompletion35(ctx context.Context, request *api.ChatCompletionRequest, callOptions ...callopt.Option) (r *api.ChatCompletionResponse, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.CreateChatCompletion35(ctx, request)
 }
 
 func (p *kGPTServiceClient) CreateImage(ctx context.Context, request *api.ImageRequest, callOptions ...callopt.Option) (r *api.ImageResponse, err error) {
