@@ -17,7 +17,3 @@ struct ImageResponseDataInner {
     string URL
     string B64JSON
 }
-
-service GPTService {
-    ImageResponse CreateImage(ImageRequest request)
-}

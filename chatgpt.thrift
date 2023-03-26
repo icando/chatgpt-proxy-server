@@ -1,3 +1,5 @@
+include "image.thrift"
+
 namespace go api
 
 struct Request {
@@ -58,4 +60,5 @@ struct ChatCompletionResponse {
 service GPTService {
     Response echo(1: Request req)
     ChatCompletionResponse CreateChatCompletion35(ChatCompletionRequest request)
+    image.ImageResponse CreateImage(image.ImageRequest request)
 }
